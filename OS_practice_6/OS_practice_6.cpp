@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <conio.h>
 #include <Windows.h>
 #include <WinUser.h>
@@ -33,11 +33,30 @@ int main() {
     for (short i = 0; i < 32; i++) std::cout << char(196);
     std::cout << char(217) << '\n';
     for (short i = 0; i < 512; i++) mem[i] = ' ';
+    char alphabet[26];
     for (;;) {
         char input = _getch();
         if (input == 'a') {
             int size;
             std::cin >> size;
+            char letter = 96;
+            for (short i = 1; i <= 26; i++) {
+                bool letterok = true;
+                for (short j = 0; j < 26; j++) {
+                    if (alphabet[j] == letter + i) {
+                        letterok = false;
+                        break;
+                    }
+                }
+                if (letterok) {
+                    letter = 96 + i;
+                    break;
+                }
+            }
+            if (letter == 96) {
+                std::cout << "error\n";
+                continue;
+            }
             for (short i = 0; i < 512; i++) {
                 bool ok = true;
                 for (short j = 0; j < size; j++) {
@@ -48,7 +67,7 @@ int main() {
                 }
                 if (ok) {
                     for (short j = 0; j < size; j++) {
-                        mem[i + j] = 'a';
+                        mem[i + j] = letter;
                         
                     }
                     break;
