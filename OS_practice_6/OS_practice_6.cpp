@@ -64,8 +64,9 @@ int main() {
             std::cout << "Size of new task: ";
             int size;
             std::cin >> size;
-            if (size > 640) {
-                std::cout << "err: not enough free space";
+            if (size > 640 or size < 1) {
+                if (size > 640) std::cout << "err: not enough free space";
+                if (size < 1) std::cout << "err: size < 1";
                 taskLetterIsFree[taskLetter - 97] = true;
             } else {
                 for (short i = 0; i < 640 - (size - 1); i++) {
